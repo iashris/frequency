@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 1200px;
+        margin: 80px auto;
+        font-family: Helvetica;
+        text-align: center;
+      }
+      .title {
+        margin-bottom: 50px;
+      }
+      .inps {
+        display: flex;
+      }
+      .inps > div {
+        flex: 1;
+      }
+      .listinp {
+        width: 100%;
+      }
+      .result {
+        border: 1px solid black;
+        width: 80%;
+        text-align: left;
+        padding: 12px;
+        overflow: scroll;
+        height: 28rem;
+        margin-left: 16px;
+      }
+      textarea {
+        height: 29.2rem;
+        margin-right: 16px;
+      }
+      .control {
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h2>List Frequency Calculator</h2>
+    </div>
+    <div class="inps">
+      <div>
+        <textarea id="inp" class="listinp" rows="28"></textarea>
+      </div>
+      <div class="result" id="rez"></div>
+    </div>
+    <div class="control">
+      <button onclick="convert()">Convert</button>
+    </div>
+  </body>
+  <script>
+    function convert() {
+      const inp = document.getElementById('inp').value;
+      const words = inp.split('\n');
+      console.log(words);
+      const result = {};
+      const fin = words.reduce((cum, word) => {
+        if (word in cum) {
+          cum[word]++;
+        } else {
+          cum[word] = 1;
+        }
+        return cum;
+      }, {});
+      document.getElementById('rez').innerHTML = `<pre>${JSON.stringify(
+        fin,
+        null,
+        2
+      )}</pre>`;
+    }
+  </script>
+</html>
